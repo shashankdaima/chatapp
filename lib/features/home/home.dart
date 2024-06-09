@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
           right: 0,
           child: SizedBox(
               width: size.width - Lengthcontraints.sidePanelWidth,
-              height: size.height,
+              height: size.height - Lengthcontraints.bottomInputHeight,
               child: const Chat()),
         ),
         Positioned(
