@@ -31,8 +31,14 @@ class Chat extends StatelessWidget {
                         width: 32,
                         "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"),
                   ),
-                  SizedBox(width: 12,),
-                  Text(item.title, style: TextStyle(color: Colors.white70),),
+                  const SizedBox(
+                    width: 12,
+                  ),
+                  Expanded(
+                      child: Text(
+                    item.title,
+                    style: const TextStyle(color: Colors.white70),
+                  )),
                 ],
               ),
             ),

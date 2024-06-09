@@ -54,7 +54,7 @@ List<Chat> hardcodedChats = [
     role: ChatRole.user,
   ),
   Chat(
-    title: "Good evening",
+    title: "Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening",
     creationTime: DateTime.now().subtract(Duration(days: 2, hours: 6)),
     role: ChatRole.socket,
   ),
