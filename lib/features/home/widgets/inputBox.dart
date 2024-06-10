@@ -1,11 +1,20 @@
+import 'package:chatapp/features/home/chatBloc/ChatBloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Inputbox extends StatelessWidget {
+class Inputbox extends StatefulWidget {
   const Inputbox({Key? key});
 
   @override
+  State<Inputbox> createState() => _InputboxState();
+}
+
+class _InputboxState extends State<Inputbox> {
+  final inputTextController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
+    ChatBloc chatBloc = BlocProvider.of<ChatBloc>(context);
     return Center(
       child: ConstrainedBox(
         constraints: const BoxConstraints(
@@ -18,19 +27,22 @@ class Inputbox extends StatelessWidget {
               children: [
                 Expanded(
                   child: TextField(
-                    style: TextStyle(
+                    controller: inputTextController,
+                    style: const TextStyle(
                       color: Colors.white, // Change text color here
                     ),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Enter text',
                     ),
                     maxLines: null,
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.send),
+                  icon: const Icon(Icons.send),
                   onPressed: () {
-                    // Add your button onPressed functionality here
+                    chatBloc.add(ChatMessageAddedByUser(
+                        message: inputTextController.text.trim()));
+                    inputTextController.clear();
                   },
                 ),
               ],

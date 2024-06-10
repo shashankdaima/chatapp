@@ -1,0 +1,1 @@
+const wsURL="ws://echo.websocket.org/";
