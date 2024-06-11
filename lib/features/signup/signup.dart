@@ -1,68 +1,36 @@
-// lib/main.dart
-
+import 'package:chatapp/features/signup/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
-import '../../services/websocket.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:google_sign_in_platform_interface/google_sign_in_platform_interface.dart';
+import 'package:google_sign_in_web/google_sign_in_web.dart' as web;
 
-class SignupScreen extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<SignupScreen> {
-  final WebSocketManager _webSocketManager = WebSocketManager();
-  String _message = "No message yet";
-  int val=0;
-  @override
-  void initState() {
-    super.initState();
-
-    // Set up the callback to receive messages from WebSocket
-    _webSocketManager.setWebSocketCallback((message) {
-      print(message);
-      setState(() {
-        _message = message;
-      });
-    });
-
-    // Start the WebSocket connection
-    _webSocketManager.startWebSocket();
-  }
-
-  @override
-  void dispose() {
-    _webSocketManager.closeWebSocket();
-    super.dispose();
-  }
+class SignupScreen extends StatelessWidget {
+  const SignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Flutter WebSocket Example'),
+    return BlocConsumer<AuthCubit, AuthState>(listener: (context, state) {
+      if (state is Authorized) {
+        GoRouter.of(context).go('/');
+      }
+    }, builder: (context, state) {
+      return Scaffold(
+          body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text("Sign and get access to chat screen "),
+            const SizedBox(
+              height: 12,
+            ),
+            (GoogleSignInPlatform.instance as web.GoogleSignInPlugin)
+                .renderButton(),
+          ],
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'WebSocket message:',
-              ),
-              Text(
-                _message
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  _webSocketManager.sendWebSocketMessage("Hello Shashank${val}");
-                  val++;
-                },
-                child: const Text("Send Message"),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+      ));
+    });
   }
 }
