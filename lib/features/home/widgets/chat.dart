@@ -15,8 +15,18 @@ class _ChatState extends State<Chat> {
   final ScrollController _scrollController = ScrollController();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    ChatBloc chatBloc = BlocProvider.of<ChatBloc>(context);
+    chatBloc.add(OpenWs());
+  }
+
+  @override
   void dispose() {
     _scrollController.dispose();
+    ChatBloc chatBloc = BlocProvider.of<ChatBloc>(context);
+    chatBloc.add(CloseWs());
     super.dispose();
   }
 
@@ -59,7 +69,9 @@ class _ChatState extends State<Chat> {
                             fit: BoxFit.cover,
                             height: 32,
                             width: 32,
-                            (item.role==ChatRole.user)?"https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1":"https://images.pexels.com/photos/2085831/pexels-photo-2085831.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"),
+                            (item.role == ChatRole.user)
+                                ? "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                : "https://images.pexels.com/photos/2085831/pexels-photo-2085831.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"),
                       ),
                       const SizedBox(
                         width: 12,

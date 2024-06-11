@@ -16,7 +16,6 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(UnAuthorized()) {
     _googleSignIn.onCurrentUserChanged
         .listen((GoogleSignInAccount? account) async {
-      print(account);
       if (account == null) {
         emit(UnAuthorized());
       } else {

@@ -13,6 +13,7 @@ void main() {
 }
 
 final GoRouter _router = GoRouter(
+  initialLocation: "/signup",
   routes: <RouteBase>[
     GoRoute(
       path: '/',
@@ -21,9 +22,10 @@ final GoRouter _router = GoRouter(
       },
       routes: <RouteBase>[
         GoRoute(
+          name: "SignupScreen",
           path: 'signup',
           builder: (BuildContext context, GoRouterState state) {
-            return SignupScreen();
+            return const SignupScreen();
           },
         ),
       ],

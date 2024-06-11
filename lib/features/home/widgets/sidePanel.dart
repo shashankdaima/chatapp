@@ -1,4 +1,5 @@
 import 'package:chatapp/features/home/chatRoomBloc/ChatRoomBloc.dart';
+import 'package:chatapp/features/signup/cubit/auth_cubit.dart';
 import 'package:chatapp/resources/colors.dart';
 import 'package:chatapp/resources/lengthcontraints.dart';
 import 'package:chatapp/widgets/button.dart';
@@ -13,7 +14,7 @@ class SidePanel extends StatelessWidget {
   Widget build(BuildContext context) {
     ChatRoomBloc chatRoomBloc = BlocProvider.of<ChatRoomBloc>(context);
     TextEditingController inputController = TextEditingController();
-
+    AuthCubit authCubit = BlocProvider.of<AuthCubit>(context);
     void _showAddChatRoomDailog(BuildContext context) {
       showDialog(
         context: context,
@@ -128,7 +129,9 @@ class SidePanel extends StatelessWidget {
                 width: double.infinity,
                 child: CtTextButton(
                   child: const Text("Logout"),
-                  onPressed: () {},
+                  onPressed: () {
+                    authCubit.signOut();
+                  },
                 ),
               )
             ],

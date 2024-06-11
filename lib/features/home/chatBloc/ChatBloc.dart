@@ -11,7 +11,8 @@ part 'ChatState.dart';
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
   // final WebSocketService wsService = WebSocketService(wsURL);
   WebSocketManager socketManager = WebSocketManager();
-  ChatBloc(String chatRoomId)
+  final String chatRoomId;
+  ChatBloc(this.chatRoomId)
       : super(ChatState(
             chatRoomId: chatRoomId, chats: getPreviousChats(chatRoomId))) {
     on<ChatMessageAddedByUser>((event, emit) {
@@ -46,13 +47,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     });
 
     // Start the WebSocket connection when the bloc is created
-    add(OpenWs());
+    // add(OpenWs());
+    // print(chatRoomId);
   }
-  @override
-  Future<void> close() {
-    add(CloseWs());
-    return super.close();
-  }
+
 }
 
 getPreviousChats(String chatRoomId) {
