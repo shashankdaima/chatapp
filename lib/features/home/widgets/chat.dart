@@ -12,32 +12,32 @@ class Chat extends StatefulWidget {
 }
 
 class _ChatState extends State<Chat> {
-  // final ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void dispose() {
-    // _scrollController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
-  // void _scrollToBottom() {
-  //   if (_scrollController.hasClients) {
-  //     _scrollController.animateTo(
-  //       _scrollController.position.maxScrollExtent,
-  //       duration: const Duration(milliseconds: 300),
-  //       curve: Curves.easeOut,
-  //     );
-  //   }
-  // }
+  void _scrollToBottom() {
+    if (_scrollController.hasClients) {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    ChatBloc bloc = BlocProvider.of<ChatBloc>(context);
+    // ChatBloc bloc = BlocProvider.of<ChatBloc>(context);
     return BlocBuilder<ChatBloc, ChatState>(
       builder: (context, state) {
-        // WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+        WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
         return ListView.builder(
-          // controller: _scrollController,
+          controller: _scrollController,
           itemBuilder: (context, index) {
             final item = state.chats[index];
             return Container(
@@ -59,7 +59,7 @@ class _ChatState extends State<Chat> {
                             fit: BoxFit.cover,
                             height: 32,
                             width: 32,
-                            "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"),
+                            (item.role==ChatRole.user)?"https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1":"https://images.pexels.com/photos/2085831/pexels-photo-2085831.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"),
                       ),
                       const SizedBox(
                         width: 12,

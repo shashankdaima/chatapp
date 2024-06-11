@@ -21,7 +21,7 @@ final GoRouter _router = GoRouter(
         GoRoute(
           path: 'signup',
           builder: (BuildContext context, GoRouterState state) {
-            return const SignupScreen();
+            return  SignupScreen();
           },
         ),
       ],

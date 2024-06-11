@@ -11,57 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // import '../../services/wsService.dart';
 
 List<ChatMessage> hardcodedChats = [
-  ChatMessage(
-    title: "Hello!",
-    creationTime: DateTime.now().subtract(Duration(days: 1)),
-    role: ChatRole.user,
-  ),
-  ChatMessage(
-    title: "How are you?",
-    creationTime: DateTime.now().subtract(Duration(hours: 3)),
-    role: ChatRole.socket,
-  ),
-  ChatMessage(
-    title: "Good morning",
-    creationTime: DateTime.now().subtract(Duration(days: 2)),
-    role: ChatRole.user,
-  ),
-  ChatMessage(
-    title: "What's up?",
-    creationTime: DateTime.now().subtract(Duration(minutes: 30)),
-    role: ChatRole.socket,
-  ),
-  ChatMessage(
-    title: "Nice weather today!",
-    creationTime: DateTime.now().subtract(Duration(days: 1, hours: 4)),
-    role: ChatRole.user,
-  ),
-  ChatMessage(
-    title: "Long time no see",
-    creationTime: DateTime.now().subtract(Duration(days: 3)),
-    role: ChatRole.socket,
-  ),
-  ChatMessage(
-    title: "Hey there!",
-    creationTime: DateTime.now().subtract(Duration(hours: 2)),
-    role: ChatRole.user,
-  ),
-  ChatMessage(
-    title: "How's your day?",
-    creationTime: DateTime.now().subtract(Duration(days: 1, hours: 5)),
-    role: ChatRole.socket,
-  ),
-  ChatMessage(
-    title: "What are you up to?",
-    creationTime: DateTime.now().subtract(Duration(days: 2, hours: 3)),
-    role: ChatRole.user,
-  ),
-  ChatMessage(
-    title:
-        "Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening Good evening",
-    creationTime: DateTime.now().subtract(Duration(days: 2, hours: 6)),
-    role: ChatRole.socket,
-  ),
+  
 ];
 
 class HomeScreen extends StatelessWidget {

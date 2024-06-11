@@ -8,7 +8,6 @@ final class ChatMessageAddedByUser extends ChatEvent {
   ChatMessageAddedByUser({required this.message});
 
   @override
-  // TODO: implement props
   List<Object?> get props => [this.message];
 }
 final class ChatMessageAddedBySystem extends ChatEvent {
@@ -17,13 +16,18 @@ final class ChatMessageAddedBySystem extends ChatEvent {
   ChatMessageAddedBySystem({required this.message});
 
   @override
-  // TODO: implement props
+
   List<Object?> get props => [this.message];
+}
+
+
+final class OpenWs extends ChatEvent {
+  @override
+  List<Object?> get props => [];
 }
 
 
 final class CloseWs extends ChatEvent {
   @override
-  // TODO: implement props
   List<Object?> get props => [];
 }

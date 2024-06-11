@@ -22,7 +22,7 @@ class _InputboxState extends State<Inputbox> {
         ),
         child: Card(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Row(
               children: [
                 Expanded(
@@ -40,7 +40,7 @@ class _InputboxState extends State<Inputbox> {
                 IconButton(
                   icon: const Icon(Icons.send),
                   onPressed: () {
-                    chatBloc.add(ChatMessageAddedBySystem(
+                    chatBloc.add(ChatMessageAddedByUser(
                         message: inputTextController.text.trim()));
                     inputTextController.clear();
                   },
