@@ -11,7 +11,6 @@ final class ChatMessageAddedByUser extends ChatEvent {
   // TODO: implement props
   List<Object?> get props => [this.message];
 }
-
 final class ChatMessageAddedBySystem extends ChatEvent {
   final String message;
 
@@ -22,11 +21,6 @@ final class ChatMessageAddedBySystem extends ChatEvent {
   List<Object?> get props => [this.message];
 }
 
-final class ConnectWs extends ChatEvent {
-  @override
-  // TODO: implement props
-  List<Object?> get props => [];
-}
 
 final class CloseWs extends ChatEvent {
   @override

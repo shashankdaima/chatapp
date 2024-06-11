@@ -4,16 +4,40 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 // import '../../../temporaryValues/chatRoomTemporaryChat.dart';
 
-class Chat extends StatelessWidget {
+class Chat extends StatefulWidget {
   const Chat({super.key});
 
   @override
+  State<Chat> createState() => _ChatState();
+}
+
+class _ChatState extends State<Chat> {
+  // final ScrollController _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    // _scrollController.dispose();
+    super.dispose();
+  }
+
+  // void _scrollToBottom() {
+  //   if (_scrollController.hasClients) {
+  //     _scrollController.animateTo(
+  //       _scrollController.position.maxScrollExtent,
+  //       duration: const Duration(milliseconds: 300),
+  //       curve: Curves.easeOut,
+  //     );
+  //   }
+  // }
+
+  @override
   Widget build(BuildContext context) {
+    ChatBloc bloc = BlocProvider.of<ChatBloc>(context);
     return BlocBuilder<ChatBloc, ChatState>(
       builder: (context, state) {
-        print("Rerendering State: ${state.chatRoomId}");
-
+        // WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
         return ListView.builder(
+          // controller: _scrollController,
           itemBuilder: (context, index) {
             final item = state.chats[index];
             return Container(

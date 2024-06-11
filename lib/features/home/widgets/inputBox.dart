@@ -40,7 +40,7 @@ class _InputboxState extends State<Inputbox> {
                 IconButton(
                   icon: const Icon(Icons.send),
                   onPressed: () {
-                    chatBloc.add(ChatMessageAddedByUser(
+                    chatBloc.add(ChatMessageAddedBySystem(
                         message: inputTextController.text.trim()));
                     inputTextController.clear();
                   },
