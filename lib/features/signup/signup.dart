@@ -22,7 +22,7 @@ class SignupScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("Sign and get access to chat screen "),
+            Text("Sign and get access to chat screen ${(state is Authorized)?(state.account.displayName):"Unauthorized"}"),
             const SizedBox(
               height: 12,
             ),
