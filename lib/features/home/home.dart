@@ -23,6 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    bool showSidePanel = size.width >=
+        768; // For `md` breakpoint, you can adjust the value as needed.
 
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
@@ -37,22 +39,28 @@ class _HomeScreenState extends State<HomeScreen> {
                 authState.account.email), // Ensure the provider rebuilds
             create: (context) => ChatRoomBloc(authState.account.email),
             child: Scaffold(
+              drawer: const Drawer(
+                child: SidePanel(),
+              ),
               body: Stack(
                 children: [
-                  Positioned(
-                    left: 0,
-                    child: SizedBox(
-                      width: Lengthcontraints.sidePanelWidth,
-                      height: size.height,
-                      child: const SidePanel(),
+                  if (showSidePanel)
+                    Positioned(
+                      left: 0,
+                      child: SizedBox(
+                        width: Lengthcontraints.sidePanelWidth,
+                        height: size.height,
+                        child: const SidePanel(),
+                      ),
                     ),
-                  ),
                   Positioned(
-                    top: 0,
+                    bottom: 0,
                     right: 0,
+                    left: showSidePanel ? Lengthcontraints.sidePanelWidth : 0,
                     child: SizedBox(
-                      width: size.width - Lengthcontraints.sidePanelWidth,
-                      height: size.height,
+                      width: size.width -
+                          (showSidePanel ? Lengthcontraints.sidePanelWidth : 0),
+                      height: size.height - ((showSidePanel) ? 0 : 50),
                       child: BlocBuilder<ChatRoomBloc, ChatRoomState>(
                         builder: (context, chatRoomState) {
                           return BlocProvider(
@@ -70,8 +78,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   bottom: 24,
                                   child: SizedBox(
                                     width: size.width -
-                                        Lengthcontraints.sidePanelWidth,
-                                    child: const Center(child: Inputbox()),
+                                        (showSidePanel
+                                            ? Lengthcontraints.sidePanelWidth
+                                            : 0),
+                                    child: const Center(child: Padding(
+                                      padding: EdgeInsets.symmetric(horizontal:8.0),
+                                      child: Inputbox(),
+                                    )),
                                   ),
                                 ),
                               ],
@@ -81,6 +94,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
+                  if (!showSidePanel)
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      child: AppBar(
+                        title: const Text("Chat"),
+                      ),
+                    ),
                 ],
               ),
             ),
