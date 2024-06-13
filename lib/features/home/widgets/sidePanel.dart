@@ -94,7 +94,9 @@ class SidePanel extends StatelessWidget {
               Expanded(
                 child: BlocBuilder<ChatRoomBloc, ChatRoomState>(
                   builder: (context, state) {
-                    if (state.roomIds.length > 0) {
+                    // print("RERENDERING");
+                    if (state.roomIds.isNotEmpty) {
+                      // print("RERENDERING2");
                       return ListView.builder(
                         itemBuilder: (context, index) {
                           return Padding(
@@ -113,10 +115,16 @@ class SidePanel extends StatelessWidget {
                                 state.roomIds[index],
                                 style: Theme.of(context).textTheme.titleSmall,
                               ),
-                              trailing: IconButton(
-                                icon: const Icon(Icons.delete),
-                                onPressed: () {},
-                              ),
+                              trailing: ((state.currentRoomId ==
+                                      state.roomIds[index]))
+                                  ? IconButton(
+                                      icon: const Icon(Icons.delete),
+                                      onPressed: () {
+                                        chatRoomBloc.add(DeleteChatRoomEvent(
+                                            chatRoomId: state.roomIds[index]));
+                                      },
+                                    )
+                                  : const SizedBox.shrink(),
                             ),
                           );
                         },

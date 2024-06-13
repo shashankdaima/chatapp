@@ -61,3 +61,13 @@ Future<List<ChatMessage>> getChatRoomMessages(
   }
   return [];
 }
+
+removeChatRoom(String email, String chatRoomId) async {
+  String? response = await StorageRepository.get(email);
+  if (response == null) {
+    return null;
+  }
+  User user = User.fromJson(jsonDecode(response));
+  user.chatRooms.removeWhere((chatRoom) => chatRoom.id == chatRoomId);
+  await StorageRepository.save(email, jsonEncode(user.toJson()));
+}

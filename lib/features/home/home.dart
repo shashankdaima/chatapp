@@ -33,7 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context, authState) {
         if (authState is Authorized) {
           return BlocProvider(
-            key: ValueKey(authState.account.email), // Ensure the provider rebuilds
+            key: ValueKey(
+                authState.account.email), // Ensure the provider rebuilds
             create: (context) => ChatRoomBloc(authState.account.email),
             child: Scaffold(
               body: Stack(
@@ -56,7 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         builder: (context, chatRoomState) {
                           return BlocProvider(
                             key: ValueKey(chatRoomState.currentRoomId),
-                            create: (context) => ChatBloc(chatRoomState.currentRoomId, authState.account.email),
+                            create: (context) => ChatBloc(
+                                chatRoomState.currentRoomId,
+                                authState.account.email),
                             child: Stack(
                               children: [
                                 const Padding(
@@ -66,7 +69,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Positioned(
                                   bottom: 24,
                                   child: SizedBox(
-                                    width: size.width - Lengthcontraints.sidePanelWidth,
+                                    width: size.width -
+                                        Lengthcontraints.sidePanelWidth,
                                     child: const Center(child: Inputbox()),
                                   ),
                                 ),

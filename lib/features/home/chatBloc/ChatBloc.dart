@@ -35,20 +35,22 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       ]));
     });
     on<ChatMessageAddedBySystem>((event, emit) {
-      addChatMessage(
-          dbEntities.ChatMessage(
+      if (!event.message.contains(('Request served by'))) {
+        addChatMessage(
+            dbEntities.ChatMessage(
+                title: event.message,
+                creationTime: DateTime.now(),
+                role: dbEntities.ChatRole.socket),
+            chatRoomId,
+            email);
+        emit(ChatState(chatRoomId: state.chatRoomId, chats: [
+          ...state.chats,
+          ChatMessage(
               title: event.message,
               creationTime: DateTime.now(),
-              role: dbEntities.ChatRole.socket),
-          chatRoomId,
-          email);
-      emit(ChatState(chatRoomId: state.chatRoomId, chats: [
-        ...state.chats,
-        ChatMessage(
-            title: event.message,
-            creationTime: DateTime.now(),
-            role: ChatRole.socket)
-      ]));
+              role: ChatRole.socket)
+        ]));
+      }
     });
     on<OpenWs>((event, emit) {
       socketManager.startWebSocket();
@@ -79,4 +81,3 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     emit(ChatState(chatRoomId: state.chatRoomId, chats: resultantChats));
   }
 }
-// {"email":"daima.coder@gmail.com","chatRooms":[{"id":"Default Room","messages":[]}]}

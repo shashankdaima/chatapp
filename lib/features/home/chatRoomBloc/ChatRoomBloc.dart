@@ -18,7 +18,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
     });
     on<SelectChatRoom>((event, emit) {
       emit(ChatRoomState(
-        email:state.email,
+        email: state.email,
         roomIds: state.roomIds,
         currentRoomId: event.chatRoomId,
       ));
@@ -33,6 +33,24 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
             currentRoomId: chatRooms[0]));
       }
     });
+    on<DeleteChatRoomEvent>((event, emit) async {
+      final currentRooms = state.roomIds;
+      currentRooms.removeWhere((roomId) => roomId == event.chatRoomId);
+      // print(currentRooms);
+      await removeChatRoom(state.email, event.chatRoomId);
+      emit(ChatRoomState(
+          email: state.email,
+          currentRoomId: (state.currentRoomId != event.chatRoomId)
+              ? state.currentRoomId
+              : (currentRooms.isNotEmpty)
+                  ? currentRooms[0]
+                  : NO_CHAT_ROOM_SELECTED,
+          roomIds: currentRooms));
+    });
+
+    //Getting previous chatrooms
     add(GetAllChatRooms());
   }
 }
+
+const NO_CHAT_ROOM_SELECTED = "\$NO_CHAT_ROOM_SELECTED\$";

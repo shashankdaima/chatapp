@@ -1,4 +1,5 @@
 import 'package:chatapp/features/home/chatBloc/ChatBloc.dart';
+import 'package:chatapp/features/home/chatRoomBloc/ChatRoomBloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -48,6 +49,11 @@ class _ChatState extends State<Chat> {
     // ChatBloc bloc = BlocProvider.of<ChatBloc>(context);
     return BlocBuilder<ChatBloc, ChatState>(
       builder: (context, state) {
+        if(state.chatRoomId==NO_CHAT_ROOM_SELECTED){
+          return const Center(
+            child: Text("NO CHAT ROOM SELECTED, PLEASE SELECT ONE."),
+          );
+        }
         WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
         return ListView.builder(
           controller: _scrollController,

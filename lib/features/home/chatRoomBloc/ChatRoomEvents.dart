@@ -23,3 +23,11 @@ final class GetAllChatRooms extends ChatRoomEvent {
   @override
   List<Object?> get props => [];
 }
+
+final class DeleteChatRoomEvent extends ChatRoomEvent {
+  final String chatRoomId;
+
+  DeleteChatRoomEvent({required this.chatRoomId});
+  @override
+  List<Object?> get props => [chatRoomId];
+}
