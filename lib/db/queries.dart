@@ -1,6 +1,7 @@
 part of "db.dart";
 
 saveUser(String email, User user) async {
+  // print(jsonEncode(user.toJson()));
   await StorageRepository.save(email, jsonEncode(user.toJson()));
 }
 
@@ -15,4 +16,14 @@ Future<List<String>?> getAllChatRooms(String email) async {
   }
   User user = User.fromJson(jsonDecode(result));
   return user.chatRooms.map((chatRoom) => chatRoom.id).toList();
+}
+
+addNewChatRoom(String email, String chatRoomId) async {
+  String? response = await StorageRepository.get(email);
+  if (response == null) {
+    return null;
+  }
+  User user = User.fromJson(jsonDecode(response));
+  user.chatRooms.add(ChatRoom(id: chatRoomId, messages: []));
+  await StorageRepository.save(email, jsonEncode(user.toJson()));
 }

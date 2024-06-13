@@ -13,8 +13,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   WebSocketManager socketManager = WebSocketManager();
   final String chatRoomId;
   ChatBloc(this.chatRoomId)
-      : super(ChatState(
-            chatRoomId: chatRoomId, chats: getPreviousChats(chatRoomId))) {
+      : super(ChatState(chatRoomId: chatRoomId, chats: [])) {
     on<ChatMessageAddedByUser>((event, emit) {
       socketManager.sendWebSocketMessage(event.message);
       emit(ChatState(chatRoomId: state.chatRoomId, chats: [
@@ -50,9 +49,4 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     // add(OpenWs());
     // print(chatRoomId);
   }
-
-}
-
-getPreviousChats(String chatRoomId) {
-  return hardcodedChats;
 }

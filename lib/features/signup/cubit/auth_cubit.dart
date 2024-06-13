@@ -25,7 +25,9 @@ class AuthCubit extends Cubit<AuthState> {
         emit(UnAuthorized());
       } else {
         if (await checkWhetherUserExists(account.email)) {
-          User user = User(email: account.email, chatRooms: []);
+          User user = User(
+              email: account.email,
+              chatRooms: [ ChatRoom(id: "Default Room", messages: [])]);
           await saveUser(user.email, user);
         }
         emit(Authorized(account));
