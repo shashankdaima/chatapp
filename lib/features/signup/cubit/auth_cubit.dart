@@ -1,4 +1,9 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
+import 'package:chatapp/db/db.dart';
+import 'package:chatapp/db/entities.dart';
 import 'package:equatable/equatable.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -19,6 +24,10 @@ class AuthCubit extends Cubit<AuthState> {
       if (account == null) {
         emit(UnAuthorized());
       } else {
+        if (await checkWhetherUserExists(account.email)) {
+          User user = User(email: account.email, chatRooms: []);
+          await saveUser(user.email, user);
+        }
         emit(Authorized(account));
       }
     });

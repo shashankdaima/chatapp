@@ -23,26 +23,19 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    AuthCubit authCubit = BlocProvider.of<AuthCubit>(context);
-    if (authCubit.state is UnAuthorized) {
-      GoRouter.of(context).replace("/signup");
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return BlocListener<AuthCubit, AuthState>(
+    return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is UnAuthorized) {
           GoRouter.of(context).replace("/signup");
         }
       },
-      child: BlocProvider(
-        create: (context) => ChatRoomBloc(),
+      builder: (context, state) => BlocProvider(
+        create: (context) {
+          // print(state is Authorized);
+          return ChatRoomBloc((state is Authorized) ? state.account.email : "");
+        },
         child: Scaffold(
           body: Stack(
             children: [

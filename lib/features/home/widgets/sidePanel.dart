@@ -94,33 +94,36 @@ class SidePanel extends StatelessWidget {
               Expanded(
                 child: BlocBuilder<ChatRoomBloc, ChatRoomState>(
                   builder: (context, state) {
-                    return ListView.builder(
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4.0),
-                          child: ListTile(
-                            onTap: () {
-                              chatRoomBloc.add(SelectChatRoom(
-                                  chatRoomId: state.roomIds[index]));
-                            },
-                            tileColor:
-                                (state.currentRoomId == state.roomIds[index])
-                                    ? ColorsConstants.secondaryBackgroundLight
-                                    : Colors.transparent,
-                            contentPadding: const EdgeInsets.only(left: 6),
-                            title: Text(
-                              state.roomIds[index],
-                              style: Theme.of(context).textTheme.titleSmall,
+                    if (state.roomIds.length > 0) {
+                      return ListView.builder(
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4.0),
+                            child: ListTile(
+                              onTap: () {
+                                chatRoomBloc.add(SelectChatRoom(
+                                    chatRoomId: state.roomIds[index]));
+                              },
+                              tileColor:
+                                  (state.currentRoomId == state.roomIds[index])
+                                      ? ColorsConstants.secondaryBackgroundLight
+                                      : Colors.transparent,
+                              contentPadding: const EdgeInsets.only(left: 6),
+                              title: Text(
+                                state.roomIds[index],
+                                style: Theme.of(context).textTheme.titleSmall,
+                              ),
+                              trailing: IconButton(
+                                icon: const Icon(Icons.delete),
+                                onPressed: () {},
+                              ),
                             ),
-                            trailing: IconButton(
-                              icon: const Icon(Icons.delete),
-                              onPressed: () {},
-                            ),
-                          ),
-                        );
-                      },
-                      itemCount: state.roomIds.length,
-                    );
+                          );
+                        },
+                        itemCount: state.roomIds.length,
+                      );
+                    }
+                    return const SizedBox.shrink();
                   },
                 ),
               ),

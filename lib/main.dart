@@ -2,6 +2,7 @@ import 'package:chatapp/features/home/home.dart';
 import 'package:chatapp/features/signup/cubit/auth_cubit.dart';
 import 'package:chatapp/features/signup/signup.dart';
 import 'package:chatapp/resources/colors.dart';
+import 'package:chatapp/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,37 +44,7 @@ class MyApp extends StatelessWidget {
       create: (context) => AuthCubit(),
       child: MaterialApp.router(
         themeMode: ThemeMode.dark,
-        darkTheme: ThemeData.dark(useMaterial3: false).copyWith(
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: ColorsConstants.secondaryBackground,
-              brightness: Brightness.dark,
-            ),
-            textTheme: const TextTheme(
-              titleSmall: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white),
-            ),
-            scaffoldBackgroundColor: ColorsConstants
-                .primaryBackground, // Set your background color here
-            outlinedButtonTheme: OutlinedButtonThemeData(
-              style: OutlinedButton.styleFrom(
-                  foregroundColor: Colors.white, // Text color
-                  textStyle: const TextStyle(fontWeight: FontWeight.w300)),
-            ),
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.white, // Text color for text buttons
-              ),
-            ),
-            elevatedButtonTheme: ElevatedButtonThemeData(
-              style: ElevatedButton.styleFrom(),
-            ),
-            cardTheme: const CardTheme(
-                color: ColorsConstants.primaryBackgroundLight, elevation: 4),
-            inputDecorationTheme: const InputDecorationTheme(
-              border: InputBorder.none,
-            )),
+        darkTheme: theme,
         routerConfig: _router,
       ),
     );
