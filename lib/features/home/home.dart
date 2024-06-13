@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         builder: (context, chatRoomState) {
                           return BlocProvider(
                             key: ValueKey(chatRoomState.currentRoomId),
-                            create: (context) => ChatBloc(chatRoomState.currentRoomId),
+                            create: (context) => ChatBloc(chatRoomState.currentRoomId, authState.account.email),
                             child: Stack(
                               children: [
                                 const Padding(

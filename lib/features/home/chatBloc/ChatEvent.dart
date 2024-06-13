@@ -10,24 +10,27 @@ final class ChatMessageAddedByUser extends ChatEvent {
   @override
   List<Object?> get props => [this.message];
 }
+
 final class ChatMessageAddedBySystem extends ChatEvent {
   final String message;
 
   ChatMessageAddedBySystem({required this.message});
 
   @override
-
   List<Object?> get props => [this.message];
 }
-
 
 final class OpenWs extends ChatEvent {
   @override
   List<Object?> get props => [];
 }
 
-
 final class CloseWs extends ChatEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+final class LoadChats extends ChatEvent {
   @override
   List<Object?> get props => [];
 }
